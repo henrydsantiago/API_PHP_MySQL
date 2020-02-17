@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="llenar('dolar')">Dolar</button>
+    <button onclick="llenar('euro')">Euro </button>
+
+    <ul id="monedas"></ul>
+
+    <script>
+        let place = document.getElementById('monedas');
+
+        function llenar(moneda){
+            place.innerHTML = '';
+            fetch('https://henryds.000webhostapp.com/php%20API/backend/' + moneda)
+                .then(data => data.json())
+                .then(data => {
+                    console.log(data)
+                    for (const dato of data) {
+
+                        place.innerHTML +=
+                        `
+                            <li>Fecha: ${dato.fecha} - Precio: ${dato.valor}</li>
+    
+                        `
+                    }
+                });
+
+        }
+
+    </script>
+</body>
+</html>
